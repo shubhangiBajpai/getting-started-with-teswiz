@@ -3,18 +3,9 @@
 [![CI](https://github.com/znsio/teswiz/actions/workflows/CI.yml/badge.svg)](https://github.com/znsio/teswiz/actions/workflows/CI.yml)
 [![CodeQL](https://github.com/znsio/teswiz/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/znsio/teswiz/actions/workflows/codeql-analysis.yml)
 
-# ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) Breaking changes in Latest teswiz ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png)
+# ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) Breaking changes in Latest teswiz v 0.0.80![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png)
 
 Below is the list of the breaking changes, and the corresponding new implementation starting from teswiz latest teswiz.
-
-## Package name changes
-
-The package naming has been made consistent - **com.znsio.teswiz**.
-
-Accordingly, the following changes will need to be made in your existing tests.
-
-| Purpose                              | ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) Old ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) | ![#c5f015](https://placehold.co/15x15/c5f015/c5f015.png) New ![#c5f015](https://placehold.co/15x15/c5f015/c5f015.png) |
-|:-------------------------------------|:----------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------|
 
 ## Method name changes
 
@@ -22,24 +13,28 @@ There are some method name changes as listed below:
 
 | Purpose                                                                                            | ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) Old ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) | ![#c5f015](https://placehold.co/15x15/c5f015/c5f015.png) New ![#c5f015](https://placehold.co/15x15/c5f015/c5f015.png) |
 |:---------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------|
-| To put App in Background for number of Seconds                                                     | putAppInBackground                                                                                                    | putAppInBackgroundFor                                                                                                 |
+| To put App in Background for number of Seconds                                                     | putAppInBackground(int time)                                                                                          | putAppInBackgroundFor(int numberOfSeconds)                                                                            |
 | Method Selects Device Notification from Notification Drawer                                        | selectNotification()	                                                                                                 | selectNotificationFromNotificationDrawer()                                                                            |
-| A new method is added for swipe by passing the screen height and width in percentage as parameters | -                                                                                                                     | swipeByPassingPercentageAttributes(int percentScreenHeight, int fromPercentScreenWidth, int toPercentScreenWidth)     |
 | Scroll In Dynamic Layer method is using Direction Enum instead of a String Parameter               | scrollInDynamicLayer(String direction)                                                                                | scrollInDynamicLayer(Direction direction)                                                                             |
 
-## Minor Enhancement
+## New Additions
 
-1. setWebViewContext() - Updated use of AppiumDriver to SupportsContextSwitching for switching to Web View context.
-2. setNativeAppContext() - Updated use of AppiumDriver to SupportsContextSwitching for switching to Native App
-   context.
-3. scroll(Point fromPoint, Point toPoint) - Updated use of AppiumDriver using PointerInput and Sequence to scroll using
-   2 points
-4. tapOnMiddleOfScreenOnDevice() - Updated use of AppiumDriver using PointerInput to tap in the middle of the screen
-5. scrollDownByScreenSize() - Updated use of AppiumDriver to perform scroll as per the screen size
-6. swipeLeft() - Updated use of AppiumDriver & swiping points percentage changed(swiping from the edge of the screen)
-7. swipeRight() - Updated use of AppiumDriver & swiping points percentage changed(swiping from the edge of the screen)
-8. swipe(int height, int fromWidth, int toWidth) - Updated use of AppiumDriver
-9. scrollVertically - Updated use of AppiumDriver
+There are some new methods added:
+
+| Purpose                                                                                            | ![#c5f015](https://placehold.co/15x15/c5f015/c5f015.png) New ![#c5f015](https://placehold.co/15x15/c5f015/c5f015.png) |
+|:---------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------|
+| A new method is added for swipe by passing the screen height and width in percentage as parameters | swipeByPassingPercentageAttributes(int percentScreenHeight, int fromPercentScreenWidth, int toPercentScreenWidth)     |
+
+## Updated Usage Of Appium Driver in Methods
+1. setWebViewContext()
+2. setNativeAppContext()
+3. scroll(Point fromPoint, Point toPoint) , scrollVertically() , scrollDownByScreenSize()
+4. tapOnMiddleOfScreenOnDevice()
+5. swipeLeft() , swipeRight() , swipe(int height, int fromWidth, int toWidth)
+
+## References:
+1. For appium2.0 : https://javadoc.io/doc/io.appium/java-client/8.0.0-beta/deprecated-list.html
+2. For selenium 4: https://www.selenium.dev/selenium/docs/api/java/deprecated-list.html
 
 ## Logging to ReportPortal
 
@@ -131,7 +126,11 @@ Test can run on local browsers / devices, or against any cloud provider, such as
   * **Refer to this post for instructions how to automatically setup your environment - https://applitools.com/blog/automatic-appium-setup/**
   * Additional References:
     * Setup Android Command-line tools and SDK - https://developer.android.com/studio#command-tools
-    * Install appium - https://appium.io
+    * Install appium 2.0 - http://appium.io/docs/en/2.0/quickstart/install/
+    * Install appium-device-farm and appium-dashboard:
+      * appium plugin install --source=npm appium-device-farm 
+      * appium plugin install --source=npm appium-dashboard 
+      * For additional information refer - https://github.com/AppiumTestDistribution/appium-device-farm
 * Appium Desktop App is a great way to identify locators, and the recorder is quite helpful to quickly identify multiple
   locators for your tests - https://github.com/appium/appium-desktop/releases/tag/v1.20.2. You can also use Katalon
   Studio for locator identification (especially helpful for Windows platform)
